@@ -156,13 +156,8 @@ const getPropertyForProp = ({
   } else if (type.name === 'func') {
     return
   } else if (type.name === 'any') {
-    result = {
-      anyOf: [
-        { type: 'string', title: 'string' },
-        { type: 'number', title: 'number' },
-        { type: 'boolean', title: 'boolean' }
-      ]
-    }
+    // for no type definition, do not define type in schema
+    delete result.type
   }
 
   if (defaultValue) {
