@@ -128,12 +128,10 @@ const getPropertyForProp = ({
       result.type = 'string'
     }
   } else if (type.name === 'union') {
-    throw new Error('unsupported: unions')
-    /*
-    result.type = {
-      'oneOf': type.value.map((subType) => getPropertyForProp({ type: subType }))
-    }
-    */
+    // Without parsing all schemas together then no ability to inter-reference one-
+    // another through `"$ref": "#path/to/my/JsonSchemaType"`
+    result.anyOf = type.value.map((subType) => getPropertyForProp({ type: subType }))
+    delete result.type
   } else if (type.name === 'arrayOf') {
     result.type = 'array'
     result.items = getPropertyForProp({ type: type.value })

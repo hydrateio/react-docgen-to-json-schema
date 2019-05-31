@@ -11,8 +11,7 @@ const fixtures = path.join(__dirname, 'fixtures')
 
 fs.readdirSync(fixtures)
   .filter((filename) => {
-    return /\.(js|ts)$/.test(filename) &&
-      !/one-of-type\.js/.test(filename)
+    return /\.(js|ts)$/.test(filename)
   })
   .forEach((filename) => {
     const inputPath = path.join(fixtures, filename)
